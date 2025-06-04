@@ -1,37 +1,45 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Portfolio from './components/Portfolio';
+import About from './pages/About';
+import Projects from './pages/Projects';
 import GlobalStyles from './styles/GlobalStyles';
-import Silk from './components/ReactBits/Silk/Silk';
+import ClickSpark from './ReactBits/ClickSpark/ClickSpark.jsx';
+import Lightning from './ReactBits/Lightning/Lightning.jsx';
 
 const AppContainer = styled.div`
   position: relative;
   min-height: 100vh;
-  padding: 2rem 10%;
   z-index: 1;
-`
+`;
 
 function App() {
   return (
-    <>
+    <Router>
       <GlobalStyles />
-      <Silk
-        speed={1}
-        scale={1}
-        color="#1a1b23"
-        noiseIntensity={0.3}
-        rotation={0}
+      <Lightning
+        hue={220}
+        xOffset={0.2}
+        speed={0.5}
+        intensity={1.5}
+        size={2}
       />
-      <AppContainer>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-      </AppContainer>
-    </>
+      <ClickSpark
+        sparkColor='#fff'
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+      >
+        <AppContainer>
+          <Routes>
+            <Route path="/" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+        </AppContainer>
+      </ClickSpark>
+    </Router>
   )
 }
 
