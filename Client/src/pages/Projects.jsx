@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import realEstateImg from '../assets/real-estate.png';
-import Newspaper from '../assets/newspaper.jpg'
+import Newspaper from '../assets/newspaper.jpg';
+import Instagram from '../assets/instagram.jpg';
+import Ecommerce from '../assets/ecomerce.jpg';
+import Olx from '../assets/OLX.png';
 
 const ProjectsContainer = styled.div`
   min-height: 100vh;
@@ -181,8 +184,8 @@ const projects = [
     id: 1,
     title: "E-Commerce Platform",
     description: "A full-stack e-commerce platform with user authentication, product management, and secure payment integration.",
-    image: "https://via.placeholder.com/300x200",
-    tech: ["React", "Node.js", "MongoDB", "Express"],
+    image: Ecommerce,
+    tech: ["React", "Node.JS", "MongoDB", "Express"],
     category: "Full Stack",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/example"
@@ -191,8 +194,8 @@ const projects = [
     id: 2,
     title: "Instagram Clone",
     description: "This Instagram Clone is a fully functional, visually inspired replica of the popular social media platform Instagram. It recreates core features such as user authentication, image sharing, liking posts, and viewing user profiles — all built with modern web technologies and responsive design principles.",
-    image: "https://via.placeholder.com/300x200",
-    tech: ["React", "Node.js", "MongoDB"],
+    image: Instagram,
+    tech: ["React", "Node.JS", "MongoDB"],
     category: "Full Stack",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/example"
@@ -202,7 +205,7 @@ const projects = [
     title: "Real Estate Listings",
     description: "Property listing platform with search, filter, and booking functionality.",
     image: realEstateImg,
-    tech: ["React", "Node.js", "MongoDB"],
+    tech: ["React", "Node.JS", "MongoDB"],
     category: "Web App",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/FAYASISMAEL/Global-Real-Estates/tree/master"
@@ -212,10 +215,20 @@ const projects = [
     title: "NewsPaper Website",
     description: "NewPaper is a clean and modern news portal website built to deliver dynamic and visually appealing news content. Designed with responsiveness and user experience in mind, the site presents categorized news articles, eye-catching headlines, and a smooth navigation flow for readers.",
     image: Newspaper,
-    tech: ["HTML", "CSS", "JavaScript"],
+    tech: ["HTML", "CSS"],
     category: "Front-End",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/FAYASISMAEL/NewPaper-website/tree/main"
+  },
+  {
+    id: 5,
+    title: "Olx Clone",
+    description: "This OLX Clone is a full-stack web application that replicates the core functionalities of the popular OLX platform, allowing users to buy, sell, and explore products across various categories. Built with modern web technologies, it delivers a responsive and user-friendly experience for managing listings, viewing product details, and contacting sellers.",
+    image: Olx,
+    tech: ["React", "Node.JS", "MongoDB"],
+    category: "Front-End",
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/FAYASISMAEL/Olx-clone-Website"
   }
 ];
 

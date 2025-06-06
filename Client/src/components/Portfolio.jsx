@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS with your public key
+emailjs.init("EwXOvx8aFyVkZMMZi"); // Your EmailJS public key
 
 const AppContainer = styled.div`
   position: relative;
@@ -249,20 +253,14 @@ const SubmitButton = styled.button`
 `;
 
 const Message = styled.div`
-  padding: 0.8rem;
-  border-radius: 6px;
+  padding: 1rem;
   margin-bottom: 1rem;
+  border-radius: 8px;
   text-align: center;
-  
-  ${({ type }) => type === 'success' && `
-    background-color: #065f46;
-    color: #ffffff;
-  `}
-  
-  ${({ type }) => type === 'error' && `
-    background-color: #7f1d1d;
-    color: #ffffff;
-  `}
+  background-color: ${props => 
+    props.type === 'success' ? '#1a472a' : 
+    props.type === 'error' ? '#5c1a1a' : '#2a2b33'};
+  color: #ffffff;
 `;
 
 const BottomNav = styled.nav`
@@ -331,66 +329,14 @@ const SocialIcon = styled.a`
 `;
 
 const Portfolio = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    location: '',
-    message: ''
-  });
-  const [status, setStatus] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleConnect = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setStatus(null);
-
-    try {
-      const response = await fetch('http://localhost:5000/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setStatus({ type: 'success', message: data.message });
-        setFormData({ name: '', email: '', location: '', message: '' });
-        setTimeout(() => setIsModalOpen(false), 2000);
-      } else {
-        const subject = `Portfolio Contact from ${formData.name}`;
-        const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-Location: ${formData.location}
-
-Message:
-${formData.message}
-        `;
-        window.location.href = `mailto:fayas.ofcl@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        setStatus({ type: 'info', message: 'Opening your email client...' });
-      }
-    } catch (error) {
-      setStatus({ 
-        type: 'error', 
-        message: 'Failed to send message. Please try again or use your email client.' 
-      });
-    }
-
-    setIsSubmitting(false);
+    const subject = 'Portfolio Contact Request';
+    const body = 'Hi Fayas,\n\nI would like to connect with you regarding...';
+    window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=fayas.ofcl@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const projects = [
@@ -410,11 +356,13 @@ ${formData.message}
       tech: ["React", "TailwindCSS"]
     },
     {
-      title: "Blog Website (React)",
+      title: "Instagram Clone",
       description: "A responsive blog application, arouting state management, foruting",
       tech: ["React", "Redux"]
     }
   ];
+
+  
 
   return (
     <AppContainer>
@@ -423,7 +371,7 @@ ${formData.message}
         <HeroContent>
           <Title>Fayas Ismael</Title>
           <Subtitle>Junior Software Engineer | Full Stack Developer</Subtitle>
-          <ConnectButton onClick={() => setIsModalOpen(true)}>
+          <ConnectButton onClick={handleConnect}>
             Let's Connect
           </ConnectButton>
           <SocialLinks>
@@ -437,12 +385,12 @@ ${formData.message}
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
             </SocialIcon>
-            <SocialIcon href="https://www.linkedin.com/in/fayas-ismael" target="_blank" rel="noopener noreferrer">
+            <SocialIcon href="https://www.linkedin.com/in/fayas-ismael-a496b7270/" target="_blank" rel="noopener noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
               </svg>
             </SocialIcon>
-            <SocialIcon href="mailto:fayas.ofcl@gmail.com">
+            <SocialIcon onClick={handleConnect} style={{ cursor: 'pointer' }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
               </svg>
@@ -553,69 +501,13 @@ ${formData.message}
         </NavItem>
         <NavItem 
           $active={activeSection === 'contact'} 
-          onClick={() => {
-            setActiveSection('contact');
-            setIsModalOpen(true);
-          }}
+          onClick={handleConnect}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         </NavItem>
       </BottomNav>
-
-      {/* Contact Modal */}
-      {isModalOpen && (
-        <ModalOverlay onClick={() => setIsModalOpen(false)}>
-          <ModalContent onClick={e => e.stopPropagation()}>
-            <CloseButton onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
-            <SectionTitle>Let's Connect</SectionTitle>
-            
-            {status && (
-              <Message type={status.type}>
-                {status.message}
-              </Message>
-            )}
-
-            <Form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                type="text"
-                name="location"
-                placeholder="Your Location"
-                value={formData.location}
-                onChange={handleChange}
-                required
-              />
-              <TextArea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              <SubmitButton type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </SubmitButton>
-            </Form>
-          </ModalContent>
-        </ModalOverlay>
-      )}
     </AppContainer>
   );
 };
