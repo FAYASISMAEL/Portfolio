@@ -7,13 +7,21 @@ import Projects from './pages/Projects';
 import GlobalStyles from './styles/GlobalStyles';
 import ClickSpark from './ReactBits/ClickSpark/ClickSpark.jsx';
 import LoadingAnimation from './components/LoadingAnimation';
-import ParticleBackground from './components/ParticleBackground';
 
 const AppContainer = styled.div`
   position: relative;
   min-height: 100vh;
   z-index: 1;
-  background: transparent;
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a1a1a 25%,
+    #141414 50%,
+    #1a1a1a 75%,
+    #0a0a0a 100%
+  );
+  background-size: 400% 400%;
+  color: #ffffff;
 `;
 
 function App() {
@@ -32,7 +40,6 @@ function App() {
     <Router>
       <GlobalStyles />
       {isLoading && <LoadingAnimation />}
-      <ParticleBackground />
       <ClickSpark
         sparkColor='#fff'
         sparkSize={10}
