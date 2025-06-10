@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import TechStackSlider from './TechStackSlider';
 
 // Initialize EmailJS with your public key
 emailjs.init("EwXOvx8aFyVkZMMZi"); // Your EmailJS public key
@@ -447,6 +448,7 @@ const Portfolio = () => {
             </SkillsContainer>
           </SkillCategory>
         </SkillsGrid>
+        <TechStackSlider />
       </AboutSection>
 
       {/* Projects Section */}

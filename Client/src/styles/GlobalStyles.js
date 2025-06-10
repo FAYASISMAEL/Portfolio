@@ -8,41 +8,32 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
   }
 
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
   body {
-    background-color: #0a0b0f;
+    background-color: #0f0f0f;
     color: #ffffff;
     line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
-  p {
-    margin-bottom: 1rem;
-    color: #a1a1aa;
-  }
-
-  section {
-    margin: 4rem 0;
+  #root {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
   }
 
   button {
-    cursor: pointer;
+    background: none;
     border: none;
+    cursor: pointer;
     outline: none;
   }
 `
 
-export default GlobalStyles 
+export default GlobalStyles;

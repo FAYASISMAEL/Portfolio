@@ -1,29 +1,38 @@
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Portfolio from './components/Portfolio';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import GlobalStyles from './styles/GlobalStyles';
 import ClickSpark from './ReactBits/ClickSpark/ClickSpark.jsx';
-import Lightning from './ReactBits/Lightning/Lightning.jsx';
+import LoadingAnimation from './components/LoadingAnimation';
+import ParticleBackground from './components/ParticleBackground';
 
 const AppContainer = styled.div`
   position: relative;
   min-height: 100vh;
   z-index: 1;
+  background: transparent;
 `;
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router>
       <GlobalStyles />
-      <Lightning
-        hue={220}
-        xOffset={0.2}
-        speed={0.5}
-        intensity={1.5}
-        size={2}
-      />
+      {isLoading && <LoadingAnimation />}
+      <ParticleBackground />
       <ClickSpark
         sparkColor='#fff'
         sparkSize={10}
