@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fayas Ismael</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F4F0;
+    --ink: #111111;
+    --ink-muted: #8A8984;
+    --accent: #D14B1F;
+    --border: #DDDBD5;
+    --card-bg: #EEECEA;
+    --white: #FAFAF7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--border); }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* SECTIONS */
+  section {
+    padding: 5.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 4rem;
+    max-width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-tag::before {
+    content: '—';
+    margin-right: 0.75rem;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 14ch;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  .hero-sub {
+    margin-top: 2.75rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+  .hero-desc {
+    max-width: 36ch;
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    line-height: 1.75;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: 1px solid var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+  .hero-cta:hover { background: var(--ink); color: var(--bg); }
+  .hero-cta-arrow { font-size: 1rem; transition: transform 0.2s; }
+  .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+  .about-big {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1.75rem;
+  }
+  .about-big em {
+    font-style: normal;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+  .about-body {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+  .about-right { padding-top: 3.5rem; }
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-item:first-child { border-top: 1px solid var(--border); }
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .skill-level {
+    display: flex; gap: 4px;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .dot.filled { background: var(--accent); }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .stat-box {
+    background: var(--bg);
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  /* EXPERIENCE */
+  #experience .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.75rem;
+  }
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .experience-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .experience-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .experience-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    padding-top: 0.35rem;
+  }
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+  }
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .exp-desc {
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    max-width: 58ch;
+  }
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.1rem;
+  }
+  .exp-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+
+  /* WORK */
+  #work .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .projects-grid { display: flex; flex-direction: column; gap: 2px; }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 2px;
+    min-height: 340px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .project-row.visible { opacity: 1; transform: translateY(0); }
+  .project-row:nth-child(even) { grid-template-columns: 5fr 4fr; direction: rtl; }
+  .project-row:nth-child(even) > * { direction: ltr; }
+
+  .project-visual {
+    background: var(--card-bg);
+    overflow: hidden;
+    position: relative;
+  }
+  .project-visual-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .project-row:hover .project-visual-inner { transform: scale(1.03); }
+
+  .anim-morph,
+  .anim-lines {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-info {
+    background: var(--white);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+  }
+  .project-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+  .project-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    width: fit-content;
+  }
+  .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* CONTACT */
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 0.7rem; }
+  .contact-info-item {
+    display: flex; gap: 1rem; align-items: baseline;
+  }
+  .ci-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    min-width: 70px;
+  }
+  .ci-val {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .contact-right { padding-top: 0.75rem; }
+  .form-group { margin-bottom: 1.35rem; }
+  label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.55rem;
+  }
+  input, textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem 0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  input:focus, textarea:focus { border-color: var(--ink); }
+  input::placeholder, textarea::placeholder { color: var(--border); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 2.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 1.75rem;
+  }
+  .submit-btn:hover { background: var(--accent); }
+  .submit-btn:active { transform: scale(0.98); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.75rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+  }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-bottom: 3rem;
+    }
+    #about, #contact { grid-template-columns: 1fr; gap: 2.5rem; }
+    .experience-item {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+    .project-row, .project-row:nth-child(even) {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      min-height: auto;
+    }
+    .project-visual { min-height: 220px; }
+    .hero-sub { flex-direction: column; gap: 1.75rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">A 'കുട്ടി' Developer<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <h1 class="hero-title">Fayas<br>Ismael</h1>
+  <br>
+  <div class="hero-tag">MERN Stack Developer | AI/ML Developer</div>
+  <div class="hero-sub">
+    <p class="hero-desc">Click to explore the project, view its features, and understand how it was built.</p>
+    <a href="#work" class="hero-cta">View Projects <span class="hero-cta-arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="about-label">About</div>
+    <h2 class="about-big">Building digital products <em>with</em><br>Logic <em>and</em> creativity.</h2>
+    <p class="about-body">I’m Fayas Ismael, a software developer passionate about creating modern web applications and solving real-world problems through technology. My work focuses on building scalable and user-friendly digital products using modern web technologies.</p>
+    <p class="about-body">I enjoy developing full-stack applications, exploring AI-based solutions, and turning ideas into functional products. My experience includes building platforms such as real estate listing systems, AI-based measurement tools, and community platforms.</p>
+    <p class="about-body">
+      I believe great software should be simple, efficient, and meaningful — technology that not only works well but also creates real impact for users.
+    </p>
+    <div class="about-stats">
+      <div class="stat-box">
+        <span class="stat-num">1+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">25+</span>
+        <span class="stat-label">Projects Delivered</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="skills-list">
+      <div class="skill-item">
+        <span class="skill-name">HTML</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">CSS</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">JavaScript</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Python</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">C++</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">MongoDB</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">ExpressJS</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">ReactJS</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">OpenCV</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Github</span>
+        <div class="skill-level">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <h2 class="section-title">Work<br>Experience</h2>
+    <span class="section-count">01 — 03</span>
+  </div>
+
+  <div class="experience-list">
+
+    <div class="experience-item" data-reveal>
+      <div class="exp-date">Jul 2026 — Present</div>
+      <div class="exp-content">
+        <h3 class="exp-role">Project Manager</h3>
+        <p class="exp-company">Hive</p>
+        <p class="exp-desc">Led software development projects by coordinating cross-functional teams, managing project timelines, assigning and tracking tasks, overseeing intern recruitment and onboarding, conducting candidate interviews, monitoring project progress, and ensuring the successful delivery of web and mobile applications through effective team collaboration and communication.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Discord</span>
+          <span class="exp-tag">Notion</span>
+          <span class="exp-tag">Jira</span>
+          <span class="exp-tag">Project Management</span>
+          <span class="exp-tag">Task Management</span>
+          <span class="exp-tag">Project Coordination</span>
+          <span class="exp-tag">Recruitment & Interviewing</span>
+          <span class="exp-tag">Team Communication</span>
+          <span class="exp-tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="experience-item" data-reveal>
+      <div class="exp-date">Nov 2025 — Mar 2026</div>
+      <div class="exp-content">
+        <h3 class="exp-role">Community Lead</h3>
+        <p class="exp-company">Cenit Labs</p>
+        <p class="exp-desc">Led community engagement initiatives by organizing technical events, workshops, and networking activities. Collaborated with students, developers, and mentors to foster an active tech community, coordinate outreach programs, onboard new members, and support knowledge-sharing and community growth.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Discord</span>
+          <span class="exp-tag">Community Management</span>
+          <span class="exp-tag">Team Leadership</span>
+          <span class="exp-tag">Networking</span>
+          <span class="exp-tag">Social Media Communication</span>
+          <span class="exp-tag">Problem Solving</span>
+          <span class="exp-tag">Team Collaboration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="experience-item" data-reveal>
+      <div class="exp-date">Dec 2024 — May 2025 </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Mern Stack Developer</h3>
+        <p class="exp-company">Synnefo Solutions</p>
+        <p class="exp-desc">Worked on developing and maintaining MERN stack web applications by building responsive React.js interfaces, developing REST APIs with Node.js and Express.js, managing MongoDB databases, implementing authentication, fixing bugs, and collaborating with the development team to deliver scalable and efficient software solutions.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">HTML</span>
+          <span class="exp-tag">CSS</span>
+          <span class="exp-tag">JavaScript</span>
+          <span class="exp-tag">MongoDB</span>
+          <span class="exp-tag">Express.js</span>
+          <span class="exp-tag">React.js</span>
+          <span class="exp-tag">Node.js</span>
+          <span class="exp-tag">Github</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header">
+    <h2 class="section-title">Selected<br>Projects</h2>
+    <span class="section-count">Explore My Work</span>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-row" data-reveal>
+      <div class="project-visual">
+        <div class="project-visual-inner">
+          <div class="anim-morph">
+            <img src="Screenshot 2026-04-02 032341.png" alt="Global Real Estate" width="500" height="300" style="object-fit:cover; width:100%; height:100%;">
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <h3 class="project-name">Global Real Estate</h3>
+          <p class="project-cat">Web Development — 2025</p>
+          <p class="project-desc">Global Real Estate is a property listing platform where users can browse and explore properties with detailed information, images, and pricing in a clean and user-friendly interface.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <a href="https://github.com/FAYASISMAEL/Global-Real-Estates/tree/main" class="project-link">View →</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-row" data-reveal>
+      <div class="project-visual">
+        <div class="project-visual-inner">
+          <div class="anim-morph">
+            <img src="image.png" alt="CoinMetric AI" width="600" height="400" style="object-fit:cover; width:100%; height:100%;">
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <h3 class="project-name">CoinMetric_AI</h3>
+          <p class="project-cat">Web Development — 2026</p>
+          <p class="project-desc">CoinMetric AI is an AI-based tool that detects and calculates the diameter of objects from images using computer vision and image processing techniques.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">OpenCV</span>
+          </div>
+        </div>
+        <a href="https://github.com/FAYASISMAEL/CoinMetric_AI" class="project-link">View →</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-row" data-reveal>
+      <div class="project-visual">
+        <div class="project-visual-inner">
+          <div class="anim-lines">
+            <img src="Screenshot 2026-04-02 035616.png" alt="Hope Foundation" width="500" height="300" style="object-fit:cover; width:100%; height:100%;">
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <h3 class="project-name">Hope Foundation</h3>
+          <p class="project-cat">Web Development — 2026</p>
+          <p class="project-desc">A responsive NGO website developed to showcase the mission, programs, and social impact of HOPE Foundation, enabling users to learn about initiatives, volunteer, and support community development.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+        <a href="https://github.com/Cenit-Labs/the-nurse-boy" class="project-link">View →</a>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-row" data-reveal>
+      <div class="project-visual">
+        <div class="project-visual-inner">
+          <div class="anim-morph">
+            <img src="" alt="The Nurse Boy" width="600" height="400" style="object-fit:cover; width:100%; height:100%;">
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <div>
+          <h3 class="project-name">RiverGuard</h3>
+          <p class="project-cat">Web Development — 2026</p>
+          <p class="project-desc">RiverGuard is a smart river contamination reporting and downstream impact detection system. It allows citizens to report pollution, traces how the risk may travel through the river network, identifies affected settlements and water sources, and helps authorities review, verify, and respond to incidents more effectively.</p>
+          <div class="project-tags">
+            <span class="tag">React.js</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+        <a href="" class="project-link">View →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <div class="about-label" style="padding-top:1.5rem;border-top:1px solid var(--border);">Get in Touch</div>
+    <h2 class="contact-heading">Let's make<br>something<br>move.</h2>
+    <p class="contact-sub">Open to freelance projects, studio collaborations, and creative conversations. Reach out — I'd love to hear about what you're building.</p>
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <span class="ci-label">Email</span>
+        <span class="ci-val">fayas.ofcl@gmail.com</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="ci-label">Based in</span>
+        <span class="ci-val">Available Worldwide</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="ci-label">Response</span>
+        <span class="ci-val">Within 24–48 hrs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <!-- ↓↓↓ CHANGE THIS URL to your Formspree endpoint ↓↓↓ -->
+    <form action="https://formspree.io/f/xaqrvzeg" method="POST" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Alex Rivera" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Tell me about your project</label>
+        <textarea id="message" name="message" rows="5" placeholder="Brief description, timeline, budget range..." required></textarea>
+      </div>
+
+      <!-- Optional: subject line that appears in your Gmail -->
+      <input type="hidden" name="_subject" value="New message from Portfolio">
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Send Message <span>→</span>
+      </button>
+    </form>
+
+    <div id="formSuccess" style="display:none;margin-top:2rem;">
+      <p style="font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.08em;color:var(--accent);">
+        ✓ Message sent. I'll be in touch soon.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Fayas Ismael. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="https://github.com/FAYASISMAEL" target="_blank">Github</a>
+    <a href="https://www.instagram.com/fayas_ismael/">Instagram</a>
+    <a href="https://x.com/FayaSIsmaeL22">X</a>
+    <a href="https://www.linkedin.com/in/fayasismael/">LinkedIn</a>
+  </div>
+</footer>
+  
+<script>
+  // Nav scroll state
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Form submit with Formspree
+const form = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const successMsg = document.getElementById('formSuccess');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    } else {
+      alert('Something went wrong. Please try again or email me directly.');
+      submitBtn.textContent = 'Send Message →';
+      submitBtn.disabled = false;
+    }
+  } catch (error) {
+    alert('Network error. Please try again later.');
+    submitBtn.textContent = 'Send Message →';
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
