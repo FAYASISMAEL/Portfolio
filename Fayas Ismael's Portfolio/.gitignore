@@ -1,0 +1,8 @@
+node_modules/
+.env
+storage/
+uploads/projects/*
+!uploads/projects/.gitkeep
+test-results/
+playwright-report/
+.test-runtime/

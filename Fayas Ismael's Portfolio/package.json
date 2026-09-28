@@ -1,0 +1,23 @@
+{
+  "name": "fayas-ismael-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.14.0" },
+  "scripts": {
+    "start": "node scripts/run-node.js --env-file-if-exists=.env server/index.js",
+    "dev": "node scripts/run-node.js --watch --env-file-if-exists=.env server/index.js",
+    "setup:admin": "node scripts/run-node.js scripts/setup-admin.js",
+    "test": "node scripts/run-node.js --test tests/*.test.js",
+    "test:browser": "node scripts/run-node.js node_modules/@playwright/test/cli.js test"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": { "@playwright/test": "^1.56.0" }
+}

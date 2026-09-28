@@ -1,0 +1,139 @@
+{
+  "projects": [
+    {
+      "id": "global-real-estate",
+      "name": "Global Real Estate",
+      "category": "Web Development",
+      "year": "2025",
+      "description": "Global Real Estate is a property listing platform where users can browse and explore properties with detailed information, images, and pricing in a clean and user-friendly interface.",
+      "image": "/assets/images/global-real-estate.png",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "github": "https://github.com/FAYASISMAEL/Global-Real-Estates/tree/main",
+      "liveUrl": "",
+      "featured": true,
+      "order": 0,
+      "createdAt": "2026-04-02T00:00:00.000Z"
+    },
+    {
+      "id": "coinmetric-ai",
+      "name": "CoinMetric_AI",
+      "category": "Web Development",
+      "year": "2026",
+      "description": "CoinMetric AI is an AI-based tool that detects and calculates the diameter of objects from images using computer vision and image processing techniques.",
+      "image": "/assets/images/coinmetric-ai.png",
+      "technologies": [
+        "Python",
+        "OpenCV"
+      ],
+      "github": "https://github.com/FAYASISMAEL/CoinMetric_AI",
+      "liveUrl": "",
+      "featured": true,
+      "order": 1,
+      "createdAt": "2026-04-02T00:01:00.000Z"
+    },
+    {
+      "id": "hope-foundation",
+      "name": "Hope Foundation",
+      "category": "Web Development",
+      "year": "2026",
+      "description": "A responsive NGO website developed to showcase the mission, programs, and social impact of HOPE Foundation, enabling users to learn about initiatives, volunteer, and support community development.",
+      "image": "/assets/images/hope-foundation.png",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Figma"
+      ],
+      "github": "https://github.com/Cenit-Labs/the-nurse-boy",
+      "liveUrl": "",
+      "featured": true,
+      "order": 2,
+      "createdAt": "2026-04-02T00:02:00.000Z"
+    },
+    {
+      "id": "riverguard",
+      "name": "RiverGuard",
+      "category": "Web Development",
+      "year": "2026",
+      "description": "RiverGuard is a smart river contamination reporting and downstream impact detection system. It allows citizens to report pollution, traces how the risk may travel through the river network, identifies affected settlements and water sources, and helps authorities review, verify, and respond to incidents more effectively.",
+      "image": "",
+      "technologies": [
+        "React.js",
+        "Tailwind CSS",
+        "FastAPI",
+        "PostgreSQL"
+      ],
+      "github": "",
+      "liveUrl": "",
+      "featured": false,
+      "order": 3,
+      "createdAt": "2026-04-02T00:03:00.000Z"
+    }
+  ],
+  "experience": [
+    {
+      "id": "hive-pm",
+      "role": "Project Manager",
+      "company": "Hive",
+      "startDate": "2026-07",
+      "endDate": "",
+      "current": true,
+      "description": "Led software development projects by coordinating cross-functional teams, managing project timelines, assigning and tracking tasks, overseeing intern recruitment and onboarding, conducting candidate interviews, monitoring project progress, and ensuring the successful delivery of web and mobile applications through effective team collaboration and communication.",
+      "tags": [
+        "Discord",
+        "Notion",
+        "Jira",
+        "Project Management",
+        "Task Management",
+        "Project Coordination",
+        "Recruitment & Interviewing",
+        "Team Communication",
+        "Documentation"
+      ],
+      "order": 0
+    },
+    {
+      "id": "cenit-community",
+      "role": "Community Lead",
+      "company": "Cenit Labs",
+      "startDate": "2025-11",
+      "endDate": "2026-03",
+      "current": false,
+      "description": "Led community engagement initiatives by organizing technical events, workshops, and networking activities. Collaborated with students, developers, and mentors to foster an active tech community, coordinate outreach programs, onboard new members, and support knowledge-sharing and community growth.",
+      "tags": [
+        "Discord",
+        "Community Management",
+        "Team Leadership",
+        "Networking",
+        "Social Media Communication",
+        "Problem Solving",
+        "Team Collaboration"
+      ],
+      "order": 1
+    },
+    {
+      "id": "synnefo-mern",
+      "role": "Mern Stack Developer",
+      "company": "Synnefo Solutions",
+      "startDate": "2024-12",
+      "endDate": "2025-05",
+      "current": false,
+      "description": "Worked on developing and maintaining MERN stack web applications by building responsive React.js interfaces, developing REST APIs with Node.js and Express.js, managing MongoDB databases, implementing authentication, fixing bugs, and collaborating with the development team to deliver scalable and efficient software solutions.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "MongoDB",
+        "Express.js",
+        "React.js",
+        "Node.js",
+        "Github"
+      ],
+      "order": 2
+    }
+  ]
+}

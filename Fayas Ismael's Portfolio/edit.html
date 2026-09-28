@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Edit Portfolio | Fayas Ismael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav id="navbar" aria-label="Main navigation">
+    <a href="/index.html" class="nav-logo">A 'കുട്ടി' Developer<span>.</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="#project-management">Projects</a></li><li><a href="#experience-management">Experience</a></li><li><a href="/works.html" target="_blank" rel="noopener noreferrer">View Works</a></li><li><button class="nav-button" id="logout" type="button">Log Out</button></li></ul>
+  </nav>
+  <main id="main">
+    <section class="page-hero admin-hero">
+      <div class="hero-tag">Portfolio manager</div><h1 class="section-title">Your work.<br>Your story.</h1>
+      <p class="admin-intro">Manage the projects and experience shown on your portfolio.</p>
+      <p class="feedback" id="admin-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section id="project-management" class="management-section">
+      <div class="section-header"><h2 class="section-title">Project Management</h2><span class="section-count" id="featured-count"></span></div>
+      <form id="project-form" class="editor-form">
+        <h3 class="exp-role" id="project-form-title">Add New Project</h3>
+        <fieldset id="project-fields" disabled>
+          <div class="form-row">
+            <div class="form-group"><label for="project-name">Project Name</label><input id="project-name" name="name" maxlength="150" required></div>
+            <div class="form-group"><label for="project-category">Project Category</label><input id="project-category" name="category" maxlength="150" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="project-year">Project Year</label><input id="project-year" name="year" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required></div>
+            <div class="form-group"><label for="project-technologies">Technology Stack</label><input id="project-technologies" name="technologies" maxlength="1800" placeholder="React.js, Tailwind CSS, FastAPI" aria-describedby="technology-help"><p id="technology-help" class="field-help">Separate technologies with commas. Up to 30 values.</p></div>
+          </div>
+          <div class="form-group"><label for="project-description">Project Description</label><textarea id="project-description" name="description" rows="5" maxlength="6000" required></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label for="project-github">GitHub URL</label><input id="project-github" name="github" type="url" maxlength="2048" placeholder="https://github.com/..."></div>
+            <div class="form-group"><label for="project-live">Live Project URL</label><input id="project-live" name="liveUrl" type="url" maxlength="2048" placeholder="https://..."></div>
+          </div>
+          <div class="form-group"><label for="project-image">Project Image</label><input id="project-image" name="imageFile" type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" aria-describedby="image-help"><p class="field-help" id="image-help">PNG, JPG, JPEG or WebP. Maximum 5 MB. A preview appears before saving.</p><div id="image-preview" class="image-preview" hidden></div><button type="button" id="remove-image" class="text-button" hidden>Remove image</button></div>
+          <label class="checkbox-label" for="project-featured"><input id="project-featured" name="featured" type="checkbox">Show on Homepage</label>
+          <p class="field-help">Feature up to 3 projects. Use Move Up / Move Down below to set their order.</p>
+          <div class="editor-actions"><button class="submit-btn" type="submit">Save Project →</button><button class="hero-cta" type="button" id="cancel-project">Cancel</button></div>
+        </fieldset>
+        <p class="feedback" id="project-feedback" role="status" aria-live="polite"></p>
+      </form>
+      <h3 class="list-heading">Current Projects</h3><div id="admin-projects" class="admin-list" aria-busy="true"></div>
+    </section>
+    <section id="experience-management" class="management-section">
+      <div class="section-header"><h2 class="section-title">Work Experience</h2></div>
+      <form id="experience-form" class="editor-form">
+        <h3 class="exp-role" id="experience-form-title">Add New Experience</h3>
+        <fieldset id="experience-fields" disabled>
+          <div class="form-row">
+            <div class="form-group"><label for="experience-role">Job Role</label><input id="experience-role" name="role" maxlength="150" required></div>
+            <div class="form-group"><label for="experience-company">Company</label><input id="experience-company" name="company" maxlength="150" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="experience-start">Start Date</label><input id="experience-start" name="startDate" type="month" min="1900-01" required></div>
+            <div class="form-group"><label for="experience-end">End Date</label><input id="experience-end" name="endDate" type="month" min="1900-01" required></div>
+          </div>
+          <label class="checkbox-label" for="experience-current"><input id="experience-current" name="current" type="checkbox">Currently Working Here</label>
+          <div class="form-group"><label for="experience-description">Description</label><textarea id="experience-description" name="description" rows="5" maxlength="6000" required></textarea></div>
+          <div class="form-group"><label for="experience-tags">Skills / Tags</label><input id="experience-tags" name="tags" maxlength="1800" placeholder="Jira, Notion, Project Management" aria-describedby="tags-help"><p class="field-help" id="tags-help">Separate skills with commas. Up to 30 values.</p></div>
+          <div class="editor-actions"><button class="submit-btn" type="submit">Save Experience →</button><button class="hero-cta" type="button" id="cancel-experience">Cancel</button></div>
+        </fieldset>
+        <p class="feedback" id="experience-feedback" role="status" aria-live="polite"></p>
+      </form>
+      <h3 class="list-heading">Current Experience</h3><div id="admin-experience" class="admin-list" aria-busy="true"></div>
+    </section>
+  </main>
+  <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-description">
+    <h2 class="exp-role" id="delete-title">Delete this item?</h2><p id="delete-description"></p>
+    <form method="dialog" class="editor-actions"><button class="hero-cta" value="cancel" autofocus>Cancel</button><button class="submit-btn" value="delete">Delete</button></form>
+  </dialog>
+  <footer><span class="footer-copy">© 2026 Fayas Ismael. All rights reserved.</span><div class="footer-links"><a href="/index.html">Portfolio</a><a href="/works.html">Works</a></div></footer>
+  <script type="module" src="/js/edit.js"></script>
+</body>
+</html>
